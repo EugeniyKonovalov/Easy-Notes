@@ -5,7 +5,7 @@ const initialState: IState = {
   folders: [],
   notes: [],
   directoryParentId: 1,
-  selectedFolder: null,
+  selectedFolderId: 1,
   seletedNote: null,
 };
 
@@ -20,9 +20,12 @@ const folderSlice = createSlice({
       state.notes = action.payload;
     },
 
-    addFolderAsync(): void {},
+    addFolderAsync(state: any, action: PayloadAction<IFolder>): void {},
     addFolder(state: any, action: PayloadAction<IFolder>): void {
-      state.parentId = action.payload.id;
+      state.folders.push(action.payload);
+    },
+    setSelectedFolderId(state: any, action: PayloadAction<number>) {
+      state.selectedFolderId = action.payload;
     },
   },
 });

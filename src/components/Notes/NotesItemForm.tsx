@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { HOME_ROUTE } from "../../utils/constants";
 import Card from "../UI/Card";
 
 import classes from "./NotesItemForm.module.css";
@@ -29,7 +28,7 @@ const NotesItemForm = () => {
           </div>
         </div>
         <div className="btn-group">
-          <NavLink to={HOME_ROUTE}>
+          <NavLink to="/">
             <img
               src="./img/prev-arrow.ico"
               width={44}

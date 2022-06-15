@@ -34,6 +34,18 @@ body {
   background-attachment: fixed;
   background-position: center;
 }
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #555;
+}
+a:hover,
+a:active {
+  color: #555;
+}
 .home {
   font-size: 2.4rem;
   position: absolute;

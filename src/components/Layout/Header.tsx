@@ -1,17 +1,16 @@
 import React, { useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { HOME_ROUTE } from "../../utils/constants";
+import { Link } from "react-router-dom";
 import Input from "../UI/Input";
 import classes from "./Header.module.css";
 
 const Header: React.FC = (props) => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const history = useHistory();
+
   return (
     <header className={classes.header}>
-      <h1 className={classes.logo} onClick={() => history.push(HOME_ROUTE)}>
-        Note Manager
-      </h1>
+      <Link to="/">
+        <h1 className={classes.logo}>Note Manager</h1>
+      </Link>
       <form className={classes["form-search"]}>
         <Input
           ref={searchRef}

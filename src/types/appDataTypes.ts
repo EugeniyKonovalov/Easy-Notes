@@ -1,5 +1,5 @@
 export interface IFolder {
-  id: number;
+  id?: number;
   parentId?: number;
   name: string;
 }
@@ -8,7 +8,7 @@ export interface IState {
   folders: IFolder[];
   notes: INote[];
   directoryParentId: number;
-  selectedFolder: null;
+  selectedFolderId: number;
   seletedNote: null;
 }
 

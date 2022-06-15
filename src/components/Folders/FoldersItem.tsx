@@ -9,13 +9,15 @@ const FoldersList: React.FC = () => {
       return item.parentId === childId;
     });
     childrenItems.sort((a, b) => (a.id > b.id ? 1 : -1));
-    return childrenItems.map((item) => (
-      <>
+
+    return childrenItems.map((item) => {
+      console.log(item);
+      return (
         <SubFolderItem key={item.id} item={item}>
           <ul>{childrenFolder(item.id)}</ul>
         </SubFolderItem>
-      </>
-    ));
+      );
+    });
   };
   const directories = foldersData.map((item) => {
     return typeof item.parentId === "undefined" ? (

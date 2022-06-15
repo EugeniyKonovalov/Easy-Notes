@@ -7,16 +7,15 @@ import classes from "./AddFolderForm.module.css";
 const AddFolderForm: React.FC = (props) => {
   const [currentName, setCurrentName] = useState<string>("");
   const dispatch = useAppDispatch();
-  const { id, parentId }: any = useAppSelector(
-    (state) => state.folderItem.folders
+  const selectedFolderId = useAppSelector(
+    (state) => state.folderItem.selectedFolderId
   );
+
   const submitHandler = (event: React.FormEvent) => {
     event!.preventDefault();
-
     dispatch(
-      folderActions.addFolder({
-        id,
-        parentId,
+      folderActions.addFolderAsync({
+        parentId: selectedFolderId,
         name: currentName,
       })
     );
