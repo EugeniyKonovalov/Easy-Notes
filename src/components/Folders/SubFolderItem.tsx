@@ -30,14 +30,14 @@ const SubFolderItem: React.FC<AppChildrensType & subFolders> = ({ item }) => {
       alt="Opened folder"
     />
   );
-  const containedFolderImg = (
-    <img
-      src="./img/contained-folder.ico"
-      width={74}
-      height={74}
-      alt="Contained folder"
-    />
-  );
+  // const containedFolderImg = (
+  //   <img
+  //     src="./img/contained-folder.ico"
+  //     width={74}
+  //     height={74}
+  //     alt="Contained folder"
+  //   />
+  // );
 
   return (
     <li className={classes.item} onClick={toggleHandler}>
