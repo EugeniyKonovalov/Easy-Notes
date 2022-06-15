@@ -13,16 +13,16 @@ const folderSlice = createSlice({
   name: "folderItem",
   initialState,
   reducers: {
-    setFolders(state: any, action: PayloadAction<IFolder>) {
+    setFolders(state: any, action: PayloadAction<IFolder>): void {
       state.folders = action.payload;
     },
-    setNotes(state: any, action: PayloadAction<INote>) {
+    setNotes(state: any, action: PayloadAction<INote>): void {
       state.notes = action.payload;
     },
 
     addFolderAsync(): void {},
-    addFolder(state: any, action: PayloadAction<IFolder>) {
-      state.id = action.payload.id;
+    addFolder(state: any, action: PayloadAction<IFolder>): void {
+      state.parentId = action.payload.id;
     },
   },
 });

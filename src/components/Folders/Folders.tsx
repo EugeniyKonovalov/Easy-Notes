@@ -40,11 +40,7 @@ const Folders: React.FC = (props) => {
   }, [dispatch]);
 
   console.log(folderData);
-  return (
-    <ul>
-      <FoldersList />
-    </ul>
-  );
+  return <FoldersList />;
 };
 
 export default Folders;

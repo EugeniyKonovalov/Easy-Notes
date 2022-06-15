@@ -7,10 +7,9 @@ interface subFolders {
   item: IFolder;
 }
 
-const SubFolderItem: React.FC<AppChildrensType & subFolders> = ({ item }) => {
+const SubFolderItem: React.FC<AppChildrensType & subFolders> = (props) => {
   const [selected, setSelected] = useState<boolean>(false);
 
-  console.log(item);
   const toggleHandler = () => {
     setSelected(!selected);
   };
@@ -43,7 +42,7 @@ const SubFolderItem: React.FC<AppChildrensType & subFolders> = ({ item }) => {
     <li className={classes.item} onClick={toggleHandler}>
       {!selected && closedFolderImg}
       {selected && openedFolderImg}
-      <div>{item.name}</div>
+      {props.item.name} {props.children}
     </li>
   );
 };

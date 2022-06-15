@@ -9,9 +9,12 @@ const FoldersList: React.FC = () => {
       return item.parentId === childId;
     });
     childrenItems.sort((a, b) => (a.id > b.id ? 1 : -1));
-    console.log(childrenItems);
     return childrenItems.map((item) => (
-      <SubFolderItem key={item.id} item={item} />
+      <>
+        <SubFolderItem key={item.id} item={item}>
+          <ul>{childrenFolder(item.id)}</ul>
+        </SubFolderItem>
+      </>
     ));
   };
   const directories = foldersData.map((item) => {
@@ -22,7 +25,7 @@ const FoldersList: React.FC = () => {
     );
   });
 
-  return <ul>{foldersData.length > 0 && directories}</ul>;
+  return <>{foldersData.length > 0 && directories}</>;
 };
 
 export default FoldersList;
