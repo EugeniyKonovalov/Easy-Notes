@@ -1,11 +1,10 @@
-import { IFolder } from "./../types/FolderItemsType";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { call, put } from "redux-saga/effects";
-import { folderActions } from "../store/folder-slice";
+import { folderActions } from "../store/appSlice";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 
-export function* createFolder(action: PayloadAction<IFolder>): Generator {
+export function* createFolder(action: PayloadAction<any>): Generator {
   try {
     const addFolderFromApi = async () =>
       await axios.post(`${API_URL}/directories`, {

@@ -1,18 +1,25 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../hooks/redux";
-import { folderActions } from "../../store/folder-slice";
-import { IFolder } from "../../types/FolderItemsType";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { folderActions } from "../../store/appSlice";
 import Card from "../UI/Card";
 import classes from "./AddFolderForm.module.css";
 
-const AddFolderForm: React.FC<IFolder> = (props) => {
-  const [name, setName] = useState<string>("");
+const AddFolderForm: React.FC = (props) => {
+  const [currentName, setCurrentName] = useState<string>("");
   const dispatch = useAppDispatch();
-
+  const { id, parentId }: any = useAppSelector(
+    (state) => state.folderItem.folders
+  );
   const submitHandler = (event: React.FormEvent) => {
     event!.preventDefault();
 
-    dispatch(folderActions.addFolder(name));
+    dispatch(
+      folderActions.addFolder({
+        id,
+        parentId,
+        name: currentName,
+      })
+    );
   };
 
   return (
@@ -23,8 +30,7 @@ const AddFolderForm: React.FC<IFolder> = (props) => {
           <input
             type="text"
             id="folder"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setCurrentName(e.target.value)}
           />
         </div>
         <div className="btn-group">

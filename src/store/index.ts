@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import folderSlice from "./folder-slice";
+import folderSlice from "./appSlice";
 import createSagaMiddleware from "@redux-saga/core";
 import folderSaga from "../sagas";
 

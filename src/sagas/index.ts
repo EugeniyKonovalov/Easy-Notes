@@ -1,5 +1,5 @@
 import { StrictEffect, takeEvery } from "redux-saga/effects";
-import { folderActions } from "../store/folder-slice";
+import { folderActions } from "../store/appSlice";
 import { createFolder } from "./folder-saga";
 
 function* folderSaga(): Generator<StrictEffect> {

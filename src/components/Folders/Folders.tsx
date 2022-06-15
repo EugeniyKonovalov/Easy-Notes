@@ -1,19 +1,29 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { folderActions } from "../../store/folder-slice";
+import { folderActions } from "../../store/appSlice";
 import { API_URL } from "../../utils/constants";
-import FoldersItem from "./FoldersItem";
+import FoldersList from "./FoldersItem";
 
 const Folders: React.FC = (props) => {
   const dispatch = useAppDispatch();
-  const folderData = useAppSelector((state) => state.folderItem);
+  const folderData = useAppSelector((state) => state.folderItem.folders);
   useEffect(() => {
     const fetchFolder = async () => {
       await axios
         .get(`${API_URL}/directories`)
         .then((res) => {
-          dispatch(folderActions.getFolderData(res.data));
+          dispatch(folderActions.setFolders(res.data));
+        })
+        .catch((err) => {
+          throw err;
+        });
+    };
+    const fetchNotes = async () => {
+      await axios
+        .get(`${API_URL}/notices`)
+        .then((res) => {
+          dispatch(folderActions.setNotes(res.data));
         })
         .catch((err) => {
           throw err;
@@ -22,6 +32,7 @@ const Folders: React.FC = (props) => {
     try {
       setTimeout(() => {
         fetchFolder();
+        fetchNotes();
       }, 500);
     } catch (err) {
       console.log(err);
@@ -31,9 +42,7 @@ const Folders: React.FC = (props) => {
   console.log(folderData);
   return (
     <ul>
-      {folderData.map((item) => (
-        <FoldersItem key={item.id} item={item} level={0} />
-      ))}
+      <FoldersList />
     </ul>
   );
 };
