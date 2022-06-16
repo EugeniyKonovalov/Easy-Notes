@@ -5,7 +5,6 @@ import AddFolderForm from "./components/Folders/AddFolderForm";
 import EditNotes from "./Pages/EditNotes";
 import Notes from "./Pages/Notes";
 import Folders from "./components/Folders/Folders";
-import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   return (
@@ -14,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/folder" element={<Folders />} />
+          <Route path="/new_folder" element={<AddFolderForm />} />
           <Route path="/create_note" element={<EditNotes />} />
           <Route path="/notes_list" element={<Notes />} />
         </Routes>

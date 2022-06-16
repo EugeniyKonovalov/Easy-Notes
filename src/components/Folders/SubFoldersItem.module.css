@@ -1,12 +1,13 @@
 .item {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   font-size: 1.8rem;
-  margin-left: 0.8rem;
+  margin-left: 1.8rem;
 }
 .item img {
   cursor: pointer;
+}
+
+.show {
+  display: block;
 }
 
 .hide {

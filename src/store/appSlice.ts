@@ -27,6 +27,10 @@ const folderSlice = createSlice({
     setSelectedFolderId(state: any, action: PayloadAction<number>) {
       state.selectedFolderId = action.payload;
     },
+    deleteFolderAsync(state: any, action: PayloadAction<number>) {},
+    deleteFolder(state: any, action: PayloadAction<number>) {
+      state.folders.filter((item: IFolder) => item.id !== action.payload);
+    },
   },
 });
 
