@@ -38,9 +38,6 @@ const appSlice = createSlice({
     setSelectedNoteId(state: any, action: PayloadAction<number>): void {
       state.selectedNoteId = action.payload;
     },
-    setOneNote(state: any, action: PayloadAction<number>) {
-      state.notes.filter((item: INote) => item.id !== action.payload);
-    },
   },
 });
 
