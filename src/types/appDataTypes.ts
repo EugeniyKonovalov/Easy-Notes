@@ -7,16 +7,16 @@ export interface IFolder {
 export interface IState {
   folders: IFolder[];
   notes: INote[];
-  directoryParentId: number;
+  selectedNoteId: number;
   selectedFolderId: number;
   seletedNote: null;
 }
 
 export interface INote {
-  id: number;
+  id?: number;
   directoryId: number;
-  position: number;
+  position?: number;
   title: string;
   description: string;
-  tags: string[];
+  tags: string;
 }

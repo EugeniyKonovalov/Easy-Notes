@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { folderActions } from "../../store/appSlice";
+import { appActions } from "../../store/appSlice";
+
 import Card from "../UI/Card";
 import classes from "./AddFolderForm.module.css";
 
@@ -8,13 +9,13 @@ const AddFolderForm: React.FC = (props) => {
   const [currentName, setCurrentName] = useState<string>("");
   const dispatch = useAppDispatch();
   const selectedFolderId = useAppSelector(
-    (state) => state.folderItem.selectedFolderId
+    (state) => state.appItem.selectedFolderId
   );
 
   const submitHandler = (event: React.FormEvent) => {
     event!.preventDefault();
     dispatch(
-      folderActions.addFolderAsync({
+      appActions.addFolderAsync({
         parentId: selectedFolderId,
         name: currentName,
       })

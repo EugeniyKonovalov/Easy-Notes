@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { folderActions } from "../../store/appSlice";
+import { appActions } from "../../store/appSlice";
 import classes from "./SidebarMenu.module.css";
 
 const SidebarMenu: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const selectedFolderId = useAppSelector(
-    (state) => state.folderItem.selectedFolderId
+    (state) => state.appItem.selectedFolderId
   );
   const deleteFolderHandler = (id: any) => {
-    dispatch(folderActions.deleteFolderAsync(selectedFolderId));
+    dispatch(appActions.deleteFolderAsync(selectedFolderId));
   };
 
   return (

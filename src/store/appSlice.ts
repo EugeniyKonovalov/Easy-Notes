@@ -4,20 +4,17 @@ import { IFolder, INote, IState } from "../types/appDataTypes";
 const initialState: IState = {
   folders: [],
   notes: [],
-  directoryParentId: 1,
+  selectedNoteId: null,
   selectedFolderId: 1,
   seletedNote: null,
 };
 
-const folderSlice = createSlice({
-  name: "folderItem",
+const appSlice = createSlice({
+  name: "appItem",
   initialState,
   reducers: {
     setFolders(state: any, action: PayloadAction<IFolder>): void {
       state.folders = action.payload;
-    },
-    setNotes(state: any, action: PayloadAction<INote>): void {
-      state.notes = action.payload;
     },
 
     addFolderAsync(state: any, action: PayloadAction<IFolder>): void {},
@@ -31,9 +28,22 @@ const folderSlice = createSlice({
     deleteFolder(state: any, action: PayloadAction<number>) {
       state.folders.filter((item: IFolder) => item.id !== action.payload);
     },
+    setNotes(state: any, action: PayloadAction<INote>): void {
+      state.notes = action.payload;
+    },
+    addNoteAsync(state: any, action: PayloadAction<INote>): void {},
+    addNote(state: any, action: PayloadAction<INote>): void {
+      state.notes.push(action.payload);
+    },
+    setSelectedNoteId(state: any, action: PayloadAction<number>): void {
+      state.selectedNoteId = action.payload;
+    },
+    setOneNote(state: any, action: PayloadAction<number>) {
+      state.notes.filter((item: INote) => item.id !== action.payload);
+    },
   },
 });
 
-export const folderActions = folderSlice.actions;
+export const appActions = appSlice.actions;
 
-export default folderSlice;
+export default appSlice;

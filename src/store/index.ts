@@ -6,7 +6,7 @@ import appSaga from "../sagas/appSaga";
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: { folderItem: folderSlice.reducer },
+  reducer: { appItem: folderSlice.reducer },
   middleware: [sagaMiddleware],
 });
 sagaMiddleware.run(appSaga);

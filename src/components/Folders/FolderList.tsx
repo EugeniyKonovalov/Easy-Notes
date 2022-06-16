@@ -3,7 +3,7 @@ import { useAppSelector } from "../../hooks/redux";
 import SubFolderItem from "./SubFolderItem";
 
 const FoldersList: React.FC = () => {
-  const foldersData = useAppSelector((state) => state.folderItem.folders);
+  const foldersData = useAppSelector((state) => state.appItem.folders);
   const childrenFolder = (childId: number) => {
     let childrenItems = foldersData.filter((item) => {
       return item.parentId === childId;
@@ -11,7 +11,6 @@ const FoldersList: React.FC = () => {
     childrenItems.sort((a, b) => (a.id > b.id ? 1 : -1));
 
     return childrenItems.map((item) => {
-      console.log(item);
       return (
         <SubFolderItem key={item.id} item={item}>
           <ul>{childrenFolder(item.id)}</ul>

@@ -1,5 +1,7 @@
+// import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { folderActions } from "../../store/appSlice";
+import { appActions } from "../../store/appSlice";
 import { IFolder } from "../../types/appDataTypes";
 import AppChildrensType from "../../types/AppPropTypes";
 import classes from "./SubFoldersItem.module.css";
@@ -9,12 +11,13 @@ interface subFolders {
 }
 
 const SubFolderItem: React.FC<AppChildrensType & subFolders> = (props) => {
+  // const [show, setShow] = useState<boolean>(true);
   const dispatch = useAppDispatch();
-  const folderId = useAppSelector((state) => state.folderItem.selectedFolderId);
+  const folderId = useAppSelector((state) => state.appItem.selectedFolderId);
   console.log(folderId);
 
   const selectedFolderIdHandler = () => {
-    dispatch(folderActions.setSelectedFolderId(props.item.id));
+    dispatch(appActions.setSelectedFolderId(props.item.id));
   };
 
   const closedFolderImg = (
@@ -36,16 +39,19 @@ const SubFolderItem: React.FC<AppChildrensType & subFolders> = (props) => {
   );
 
   return (
-    <li
-      className={
-        props.item.parentId === 1
-          ? classes.item
-          : classes.item && classes.children
-      }
-    >
-      {openedFolderImg}
-      {props.item.name} {props.children}
-    </li>
+    <NavLink to={`/folder/${props.item.id}`}>
+      <li
+        // onClick={() => setShow(!show)}
+        className={
+          props.item.parentId === 1
+            ? classes.item
+            : classes.item && classes.children
+        }
+      >
+        {openedFolderImg}
+        {props.item.name} {props.children}
+      </li>
+    </NavLink>
   );
 };
 
