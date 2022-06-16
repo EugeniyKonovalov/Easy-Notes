@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { folderActions } from "../../store/appSlice";
 import { API_URL } from "../../utils/constants";
-import FoldersList from "./FoldersItem";
+import FoldersList from "./FolderList";
 
 const Folders: React.FC = (props) => {
   const dispatch = useAppDispatch();

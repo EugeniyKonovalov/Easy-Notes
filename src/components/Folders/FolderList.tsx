@@ -19,6 +19,7 @@ const FoldersList: React.FC = () => {
       );
     });
   };
+
   const directories = foldersData.map((item) => {
     return typeof item.parentId === "undefined" ? (
       <ul key={item.id}>{childrenFolder(item.id)}</ul>

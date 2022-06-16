@@ -1,10 +1,10 @@
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
-import AddFolderForm from "./components/Folders/AddFolderForm";
 import EditNotes from "./Pages/EditNotes";
 import Notes from "./Pages/Notes";
 import Folders from "./components/Folders/Folders";
+import AddFolderForm from "./components/Folders/AddFolderForm";
 
 function App() {
   return (

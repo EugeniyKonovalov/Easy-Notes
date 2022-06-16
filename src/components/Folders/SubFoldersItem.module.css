@@ -1,11 +1,14 @@
 .item {
   font-size: 1.8rem;
-  margin-left: 1.8rem;
+  margin-left: 0.8rem;
 }
 .item img {
   cursor: pointer;
 }
 
+.children {
+  padding-left: 2.4rem;
+}
 .show {
   display: block;
 }
