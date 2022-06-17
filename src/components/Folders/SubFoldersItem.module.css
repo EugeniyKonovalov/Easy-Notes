@@ -5,7 +5,9 @@
 .item img {
   cursor: pointer;
 }
-
+.open {
+  background-image: url("../../assets/img/opened-folder.ico");
+}
 .children {
   padding-left: 2.4rem;
 }

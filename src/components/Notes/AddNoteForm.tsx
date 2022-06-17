@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
-
 import Card from "../UI/Card";
+import classes from "./NoteItem.module.css";
 
-import classes from "./NotesItemForm.module.css";
-const NotesItemForm: React.FC = () => {
+const AddNoteForm: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [tags, setTags] = useState<string>();
-
   const dispatch = useAppDispatch();
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
-  // const notesData = useAppSelector((state) => state.appItem.notes);
+
   const submitNotesHandler = (event: React.FormEvent) => {
     event?.preventDefault();
     dispatch(
@@ -62,7 +60,7 @@ const NotesItemForm: React.FC = () => {
         <div className="btn-group">
           <NavLink to="/">
             <img
-              src="./img/prev-arrow.ico"
+              src={require("../../assets/img/prev-arrow.ico")}
               width={44}
               height={44}
               alt="Previous arrow"
@@ -76,4 +74,4 @@ const NotesItemForm: React.FC = () => {
   );
 };
 
-export default NotesItemForm;
+export default AddNoteForm;

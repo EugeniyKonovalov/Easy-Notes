@@ -20,3 +20,7 @@ export interface INote {
   description: string;
   tags: string;
 }
+
+export interface INoteItem {
+  item: INote;
+}

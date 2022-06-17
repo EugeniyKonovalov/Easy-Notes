@@ -12,7 +12,7 @@
   border: 0.2rem solid #aaa;
   border-radius: 0.4rem;
   box-shadow: 0 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
-  background-image: url("../../../public/img/olia-gozha-J4kK8b9Fgj8-unsplash.jpg");
+  background-image: url("../../../src/assets/img/olia-gozha-J4kK8b9Fgj8-unsplash.jpg");
   background-size: cover;
   background-position: center;
   overflow-y: auto;

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
+import { NEW_FOLDER, NEW_NOTE } from "../../utils/constants";
 import classes from "./SidebarMenu.module.css";
 
 const SidebarMenu: React.FC = (props) => {
@@ -16,10 +17,10 @@ const SidebarMenu: React.FC = (props) => {
   return (
     <div className={classes["sidebar-menu"]}>
       <ul>
-        <Link to="new_folder">
+        <Link to={NEW_FOLDER}>
           <li className={classes["sidebar-menu-item"]}>
             <img
-              src="./img/closed-folder.ico"
+              src={require("../../assets/img/add.ico")}
               width={36}
               height={36}
               alt="Add folder"
@@ -27,17 +28,27 @@ const SidebarMenu: React.FC = (props) => {
             <span>Add folder</span>
           </li>
         </Link>
-        <Link to="/create_note">
+        <Link to={NEW_NOTE}>
           <li className={classes["sidebar-menu-item"]}>
-            <img src="./img/add.ico" width={36} height={36} alt="Edit notes" />
-            <span>Add/Change</span>
+            <img
+              src={require("../../assets/img/edit.ico")}
+              width={36}
+              height={36}
+              alt="Edit notes"
+            />
+            <span>Add Note</span>
           </li>
         </Link>
         <li
           className={classes["sidebar-menu-item"]}
           onClick={deleteFolderHandler}
         >
-          <img src="./img/remove.ico" width={36} height={36} alt="Remove" />
+          <img
+            src={require("../../assets/img/remove.ico")}
+            width={36}
+            height={36}
+            alt="Remove"
+          />
           <span>Remove</span>
         </li>
       </ul>

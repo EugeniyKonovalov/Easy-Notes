@@ -1,36 +1,17 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/redux";
-import { appActions } from "../../store/appSlice";
-import { INote } from "../../types/appDataTypes";
-
-interface INoteItem {
-  item: INote;
-}
+import { INoteItem } from "../../types/appDataTypes";
+import Card from "../UI/Card";
+import classes from "./NoteItem.module.css";
 
 const NoteItem: React.FC<INoteItem> = (props) => {
-  const dispatch = useAppDispatch();
-  const selectedNoteIdHandler = () => {
-    dispatch(appActions.setSelectedNoteId(props.item.id));
-  };
-
-  const params = useParams();
-  console.log(params.noteId);
   return (
-    <>
-      <li>
-        <Link to={`${props.item.id}`}>
-          <img
-            src="../../../public/img/default.ico"
-            width={172}
-            height={172}
-            alt="Text document"
-            onClick={selectedNoteIdHandler}
-          />
-        </Link>
-        <h3>{props.item.title}</h3>
-      </li>
-    </>
+    <Card>
+      <h2 className={classes.title}>{props.item.title}</h2>
+      <p className={classes.description}>{props.item.description}</p>
+      <div className={classes.control}>
+        <span className={classes.tags}>{props.item.tags}</span>
+      </div>
+    </Card>
   );
 };
 
