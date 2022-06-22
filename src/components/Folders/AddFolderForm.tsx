@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
+import { HOME_ROUTE } from "../../utils/constants";
+import BackArrowBtn from "../UI/BackArrowBtn";
+import ButtonMain from "../UI/ButtonMain";
 
 import Card from "../UI/Card";
 import classes from "./AddFolderForm.module.css";
@@ -8,6 +12,7 @@ import classes from "./AddFolderForm.module.css";
 const AddFolderForm: React.FC = (props) => {
   const [currentName, setCurrentName] = useState<string>("");
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
@@ -20,6 +25,8 @@ const AddFolderForm: React.FC = (props) => {
         name: currentName,
       })
     );
+    setCurrentName("");
+    navigate(HOME_ROUTE);
   };
 
   return (
@@ -34,7 +41,8 @@ const AddFolderForm: React.FC = (props) => {
           />
         </div>
         <div className="btn-group">
-          <button className="btn">Add Folder</button>
+          <BackArrowBtn />
+          <ButtonMain text="Add Folder" />
         </div>
       </form>
     </Card>

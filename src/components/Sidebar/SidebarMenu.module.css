@@ -8,10 +8,8 @@
   align-items: center;
   margin-bottom: 1.2rem;
   cursor: pointer;
-  padding: 0.2rem 0.8rem;
+  padding: 0.2rem 0.4rem;
   margin-right: 0.8rem;
-  font-size: 1.8rem;
-  color: #333;
   border-radius: 4px;
   background-image: linear-gradient(
     to right top,
@@ -20,6 +18,7 @@
   );
   box-shadow: 0 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
 }
+
 .sidebar-menu-item:hover {
   animation: move-shadow 1.5s forwards;
 }
@@ -30,5 +29,5 @@
 }
 .sidebar-menu-item span {
   font-size: 1.4rem;
-  margin-left: 1.2rem;
+  margin-left: 0.8rem;
 }

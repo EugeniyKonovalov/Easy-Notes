@@ -1,6 +1,6 @@
 import Layout from "./components/Layout/Layout";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "./utils/constants";
 import { appActions } from "./store/appSlice";
@@ -13,27 +13,30 @@ function App() {
 
   console.log(folderData);
   console.log(noteData);
+
+  const fetchFolder = useCallback(async () => {
+    await axios
+      .get(`${API_URL}/directories`)
+      .then((res) => {
+        dispatch(appActions.setFolders(res.data));
+        return res.data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, [dispatch]);
+  const fetchNotes = useCallback(async () => {
+    await axios
+      .get(`${API_URL}/notices`)
+      .then((res) => {
+        dispatch(appActions.setNotes(res.data));
+        return res.data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, [dispatch]);
   useEffect(() => {
-    const fetchFolder = async () => {
-      await axios
-        .get(`${API_URL}/directories`)
-        .then((res) => {
-          dispatch(appActions.setFolders(res.data));
-        })
-        .catch((err) => {
-          throw err;
-        });
-    };
-    const fetchNotes = async () => {
-      await axios
-        .get(`${API_URL}/notices`)
-        .then((res) => {
-          dispatch(appActions.setNotes(res.data));
-        })
-        .catch((err) => {
-          throw err;
-        });
-    };
     try {
       const timer = setTimeout(() => {
         fetchFolder();
@@ -45,7 +48,7 @@ function App() {
     } catch (err) {
       throw new Error(err);
     }
-  }, [dispatch]);
+  }, [dispatch, fetchFolder, fetchNotes]);
   return (
     <>
       <Layout>

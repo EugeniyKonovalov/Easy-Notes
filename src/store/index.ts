@@ -2,11 +2,17 @@ import { configureStore } from "@reduxjs/toolkit";
 import folderSlice from "./appSlice";
 import createSagaMiddleware from "@redux-saga/core";
 import appSaga from "../sagas/appSaga";
+import uiSlice from "./uiSlice";
+import authSlice from "./authSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: { appItem: folderSlice.reducer },
+  reducer: {
+    appItem: folderSlice.reducer,
+    ui: uiSlice.reducer,
+    auth: authSlice.reducer,
+  },
   middleware: [sagaMiddleware],
 });
 sagaMiddleware.run(appSaga);

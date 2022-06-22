@@ -1,5 +1,6 @@
 .item {
   display: flex;
+  gap: 6.4rem;
   flex-wrap: wrap;
   list-style: none;
   margin-left: 3.2rem;
@@ -12,6 +13,16 @@
 .item img:last-child {
   margin-right: 0;
 }
+
 .title {
   text-align: center;
+  font-size: 1.6rem;
+}
+
+.drag-over {
+  border: 0.05rem solid #999;
+  border-radius: 0.4rem;
+}
+.drag-end {
+  border: none;
 }

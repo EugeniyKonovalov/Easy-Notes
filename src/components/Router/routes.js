@@ -1,8 +1,10 @@
 import Home from "../../Pages/Home";
+import Login from "../../Pages/Login";
 import NoteDetail from "../../Pages/NoteDetail";
 import {
   FOLDERS_ROUTE,
   HOME_ROUTE,
+  LOGIN,
   NEW_FOLDER,
   NEW_NOTE,
 } from "../../utils/constants";
@@ -35,5 +37,9 @@ export const routes = [
   {
     path: FOLDERS_ROUTE + ":folderId/:noteId",
     element: <NoteDetail />,
+  },
+  {
+    path: LOGIN,
+    element: <Login />,
   },
 ];

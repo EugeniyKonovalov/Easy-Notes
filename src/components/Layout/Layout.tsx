@@ -9,6 +9,7 @@ const Layout: React.FC<AppChildrensType> = (props) => {
       <Header />
       <div className={classes.main}>
         <Sidebar />
+
         <main className={classes.content}>{props.children}</main>
       </div>
     </Fragment>

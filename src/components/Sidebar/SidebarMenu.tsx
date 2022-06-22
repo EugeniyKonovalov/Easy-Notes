@@ -49,7 +49,7 @@ const SidebarMenu: React.FC = (props) => {
             height={36}
             alt="Remove"
           />
-          <span>Remove</span>
+          <span>Remove folder</span>
         </li>
       </ul>
     </div>

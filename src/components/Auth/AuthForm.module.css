@@ -1,0 +1,60 @@
+.form {
+  position: relative;
+  padding: 1.2rem;
+}
+.form-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.4rem;
+}
+.control label {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+.control input {
+  height: 4rem;
+}
+.control input {
+  font: inherit;
+  font-size: 1.8rem;
+  color: #555;
+  padding: 0.35rem;
+  border-radius: 0.4rem;
+  background-image: linear-gradient(
+    to right top,
+    rgba(255, 255, 255, 0.9),
+    rgba(165, 216, 255, 0.3)
+  );
+  border: 1px solid #aaa;
+  display: block;
+  width: 100%;
+}
+.control input:focus {
+  background-color: #eee;
+  outline-color: #777;
+}
+.invalid input {
+  background-image: linear-gradient(
+    to right top,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 0, 0, 0.5)
+  );
+  border: 1px solid rgb(255, 0, 0);
+}
+.invalid input:focus {
+  background-image: linear-gradient(
+    to right top,
+    rgba(255, 255, 255, 0.9),
+    rgb(255, 245, 228)
+  );
+  border: 1px solid rgb(255, 0, 0);
+}
+.error-text {
+  color: rgb(255, 0, 0);
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+}

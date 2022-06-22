@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
+import BackArrowBtn from "../UI/BackArrowBtn";
+import ButtonMain from "../UI/ButtonMain";
 import Card from "../UI/Card";
 import classes from "./NoteItem.module.css";
+import TagsItemForm from "./TagsItemForm";
 
 const AddNoteForm: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [tags, setTags] = useState<string>();
+  const [tags, setTags] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
-
+  const navigate = useNavigate();
   const submitNotesHandler = (event: React.FormEvent) => {
-    event?.preventDefault();
+    event!.preventDefault();
     dispatch(
       appActions.addNoteAsync({
         directoryId: selectedFolderId,
@@ -24,6 +27,9 @@ const AddNoteForm: React.FC = () => {
         tags,
       })
     );
+    setTitle("");
+    setDescription("");
+    navigate(-1);
   };
 
   return (
@@ -34,6 +40,7 @@ const AddNoteForm: React.FC = () => {
           <input
             type="text"
             id="author"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -42,32 +49,15 @@ const AddNoteForm: React.FC = () => {
           <textarea
             id="text"
             rows={10}
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
-        <div className={classes.control}>
-          {/* {notesData.map((item) => (
-              <span className={classes.tags}>{item.tags}</span>
-            ))} */}
+        <TagsItemForm tags={tags} setTags={setTags} />
 
-          <label htmlFor="tags">Tags</label>
-          <input
-            type="text"
-            id="tags"
-            onChange={(e) => setTags(e.target.value)}
-          />
-        </div>
         <div className="btn-group">
-          <NavLink to="/">
-            <img
-              src={require("../../assets/img/prev-arrow.ico")}
-              width={44}
-              height={44}
-              alt="Previous arrow"
-            />
-          </NavLink>
-
-          <button className="btn">Add Note</button>
+          <BackArrowBtn />
+          <ButtonMain text="Add Note" />
         </div>
       </form>
     </Card>

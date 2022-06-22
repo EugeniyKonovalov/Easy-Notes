@@ -73,6 +73,17 @@ a:active {
 .btn:hover {
   animation: move-shadow 1.5s forwards;
 }
+.btn:disabled,
+.btn:disabled:hover,
+.btn:disabled:active {
+  background-image: linear-gradient(
+    to right top,
+    rgba(255, 255, 255, 0.7),
+    rgba(61, 61, 61, 0.9)
+  );
+  animation: none;
+  cursor: not-allowed;
+}
 @keyframes move-shadow {
   100% {
     box-shadow: 0 0 5rem 2rem rgba(119, 119, 119, 0);
@@ -87,6 +98,6 @@ a:active {
 .btn-group img {
   cursor: pointer;
 }
-.btn-group img:hover {
+.back-arrow-btn img:hover {
   transform: translateX(-5%);
 }

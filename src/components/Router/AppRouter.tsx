@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import { routes } from "./routes";
 
-const AppRouter: React.FC = (): JSX.Element => {
+const AppRouter: React.FC = () => {
   return (
     <Routes>
       {routes.map(({ path, element }) => (

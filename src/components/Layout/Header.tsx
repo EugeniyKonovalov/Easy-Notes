@@ -1,11 +1,19 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { HOME_ROUTE } from "../../utils/constants";
+import { useAppDispatch } from "../../hooks/redux";
+import { uiActions } from "../../store/uiSlice";
+import { HOME_ROUTE, LOGIN } from "../../utils/constants";
+import ButtonMain from "../UI/ButtonMain";
 import Input from "../UI/Input";
 import classes from "./Header.module.css";
 
 const Header: React.FC = (props) => {
-  const searchRef = useRef<HTMLInputElement>(null);
+  const [searchText, setSearchText] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const showModalhandler = () => {
+    dispatch(uiActions.onToggle());
+  };
 
   return (
     <header className={classes.header}>
@@ -14,11 +22,11 @@ const Header: React.FC = (props) => {
       </Link>
       <form className={classes["form-search"]}>
         <Input
-          ref={searchRef}
+          onChange={(event) => setSearchText(event.target.value)}
           label=""
           input={{
             id: "search",
-            type: "textarea",
+            type: "text",
             placeholder: "Search",
           }}
         />
@@ -29,6 +37,12 @@ const Header: React.FC = (props) => {
           alt="Search icon"
         />
       </form>
+      <div className={classes["login-btn"]}>
+        <NavLink to={LOGIN}>
+          <ButtonMain text="Login" onClick={showModalhandler} />
+        </NavLink>
+        <ButtonMain text="User" />
+      </div>
     </header>
   );
 };
