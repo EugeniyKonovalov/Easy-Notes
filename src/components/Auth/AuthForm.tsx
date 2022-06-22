@@ -13,7 +13,7 @@ const AuthForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const isNotEmpty = (value: string) => value.trim() !== "";
   const isEmail = (value: string) => value.includes("@");
-  const isPasswordLong = (value: string) => value.trim().length > 8;
+  const isPasswordLong = (value: string) => value.trim().length >= 8;
   const {
     value: enteredName,
     isValid: nameIsValid,
@@ -21,7 +21,7 @@ const AuthForm: React.FC = () => {
     changeHandler: nameChangehandler,
     blurHandler: nameBlurHandler,
     resetInput: nameReset,
-  } = UseInput(isNotEmpty && isEmail);
+  } = UseInput(isNotEmpty);
   const {
     value: enteredEmail,
     isValid: emailIsValid,
