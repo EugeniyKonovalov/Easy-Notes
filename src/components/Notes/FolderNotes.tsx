@@ -12,6 +12,7 @@ const FolderNotes: React.FC = () => {
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const folderNotesData = noteData.filter(
     (item) => item.directoryId === selectedFolderId
   );

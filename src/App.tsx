@@ -19,7 +19,6 @@ function App() {
       .get(`${API_URL}/directories`)
       .then((res) => {
         dispatch(appActions.setFolders(res.data));
-        return res.data;
       })
       .catch((err) => {
         throw err;
@@ -30,7 +29,6 @@ function App() {
       .get(`${API_URL}/notices`)
       .then((res) => {
         dispatch(appActions.setNotes(res.data));
-        return res.data;
       })
       .catch((err) => {
         throw err;
@@ -41,7 +39,7 @@ function App() {
       const timer = setTimeout(() => {
         fetchFolder();
         fetchNotes();
-      }, 500);
+      }, 100);
       return () => {
         clearTimeout(timer);
       };

@@ -1,17 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
-import { NEW_FOLDER, NEW_NOTE } from "../../utils/constants";
+import { HOME_ROUTE, NEW_FOLDER, NEW_NOTE } from "../../utils/constants";
 import classes from "./SidebarMenu.module.css";
 
 const SidebarMenu: React.FC = (props) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
-  const deleteFolderHandler = (id: any) => {
+  const deleteFolderHandler = () => {
     dispatch(appActions.deleteFolderAsync(selectedFolderId));
+    navigate(HOME_ROUTE, { replace: true });
   };
 
   return (

@@ -23,13 +23,13 @@
 }
 
 .form-search {
+  position: relative;
   width: 36rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1.6rem;
   border-radius: 24px 18px 24px 18px;
-
   box-shadow: 0 2px 10px rgba(180, 180, 180, 0.9);
   background-image: linear-gradient(to bottom, #ddd, #aaa);
 }
@@ -49,7 +49,32 @@
   cursor: pointer;
   margin-bottom: 0.2rem;
 }
+
+.autocomplete {
+  position: absolute;
+  left: 5%;
+  top: 4.5rem;
+  width: 90%;
+  background-image: linear-gradient(to right top, #ddd, rgb(51, 155, 240, 0.7));
+  border-radius: 0.4rem;
+  list-style: none;
+  font-size: 1.4rem;
+  color: #555;
+  max-height: 25rem;
+  height: auto;
+  overflow: auto;
+  z-index: 100;
+}
+.autocomplete li {
+  padding: 1.2rem;
+}
+.autocomplete li:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #ddd, #aaa);
+}
+
 .login-btn {
   display: flex;
   justify-content: space-between;
+  gap: 1.4rem;
 }

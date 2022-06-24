@@ -1,6 +1,11 @@
-.sidebar {
+.sidebar-is-auth {
   display: grid;
   grid-template-columns: 3.3fr 4.7fr;
+  margin-top: 3.5rem;
+  padding-top: 2.4rem;
+}
+
+.sidebar {
   margin-top: 3.5rem;
   padding-top: 2.4rem;
 }

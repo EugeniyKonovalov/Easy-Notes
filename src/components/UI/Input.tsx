@@ -5,7 +5,12 @@ const Input: React.FC<inputsType> = (props) => {
   return (
     <>
       <label htmlFor={props.input.id}>{props.label}</label>
-      <input onChange={props.onChange} onBlur={props.onBlur} {...props.input} />
+      <input
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+        onClick={props.onClick}
+        {...props.input}
+      />
     </>
   );
 };

@@ -1,12 +1,14 @@
 import Home from "../../Pages/Home";
 import Login from "../../Pages/Login";
 import NoteDetail from "../../Pages/NoteDetail";
+import Search from "../../Pages/Search";
 import {
   FOLDERS_ROUTE,
   HOME_ROUTE,
   LOGIN,
   NEW_FOLDER,
   NEW_NOTE,
+  SEARCH,
 } from "../../utils/constants";
 import AddFolderForm from "../Folders/AddFolderForm";
 import Folders from "../Folders/Folders";
@@ -41,5 +43,9 @@ export const routes = [
   {
     path: LOGIN,
     element: <Login />,
+  },
+  {
+    path: SEARCH,
+    element: <Search />,
   },
 ];

@@ -1,15 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useCallback } from "react";
 import { useAppDispatch } from "../../hooks/redux";
 import UseInput from "../../hooks/useInput";
 import { authActions } from "../../store/authSlice";
-import { HOME_ROUTE } from "../../utils/constants";
+import { uiActions } from "../../store/uiSlice";
 import ButtonMain from "../UI/ButtonMain";
 import Input from "../UI/Input";
 import classes from "./AuthForm.module.css";
 
 const AuthForm: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isNotEmpty = (value: string) => value.trim() !== "";
   const isEmail = (value: string) => value.includes("@");
@@ -44,24 +42,36 @@ const AuthForm: React.FC = () => {
     formIsValid = true;
   }
 
-  const submitHandler = (event: React.FormEvent) => {
-    event!.preventDefault();
-    dispatch(
-      authActions.login({
-        name: enteredName,
-        email: enteredEmail,
-        password: enteredPassword,
-      })
-    );
-    if (!formIsValid) {
-      return;
-    }
-    nameReset();
-    emailReset();
-    passwordReset();
-    localStorage.setItem("token", enteredName);
-    navigate(HOME_ROUTE, { replace: true });
-  };
+  const submitHandler = useCallback(
+    (event: React.FormEvent) => {
+      event!.preventDefault();
+      dispatch(
+        authActions.login({
+          name: enteredName,
+          email: enteredEmail,
+          password: enteredPassword,
+        })
+      );
+      if (!formIsValid) {
+        return;
+      }
+      nameReset();
+      emailReset();
+      passwordReset();
+      localStorage.setItem("token", enteredName);
+      dispatch(uiActions.onToggle());
+    },
+    [
+      dispatch,
+      emailReset,
+      enteredEmail,
+      enteredName,
+      enteredPassword,
+      formIsValid,
+      nameReset,
+      passwordReset,
+    ]
+  );
 
   const nameClasses = nameHasError
     ? `${classes.control} ${classes.invalid}`

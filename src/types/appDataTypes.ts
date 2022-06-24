@@ -10,6 +10,7 @@ export interface IState {
   selectedNoteId: number;
   selectedFolderId: number;
   currentPosition?: number;
+  filteredNote: INote[];
 }
 
 export interface INote {

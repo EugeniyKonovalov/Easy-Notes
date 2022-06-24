@@ -6,6 +6,7 @@ const initialState: IState = {
   notes: [],
   selectedNoteId: null,
   selectedFolderId: 1,
+  filteredNote: [],
 };
 
 const appSlice = createSlice({
@@ -43,6 +44,9 @@ const appSlice = createSlice({
     },
     dragAndDropNote(state: any, action: PayloadAction<INote[]>) {
       state.notes = action.payload;
+    },
+    filteredNote(state: any, action: PayloadAction<INote[]>) {
+      state.filteredNote = action.payload;
     },
   },
 });

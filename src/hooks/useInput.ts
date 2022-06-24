@@ -7,14 +7,14 @@ const UseInput = (validateValue: any) => {
   const valueIsValid = validateValue(enteredValue);
   const hasError = !valueIsValid && isTouched;
 
-  const changeHandler = (event: any): void => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setEnteredValue(event.target.value);
   };
 
   const blurHandler = (): void => {
     setIsTouched(true);
   };
-  console.log(isTouched);
+
   const resetInput = (): void => {
     setEnteredValue("");
     setIsTouched(false);

@@ -5,7 +5,7 @@ import Folders from "../Folders/Folders";
 
 const Sidebar: React.FC = (props) => {
   return (
-    <aside className={classes.sidebar}>
+    <aside className={classes["sidebar-is-auth"]}>
       <SidebarMenu />
       <div className={classes["sidebar-directories"]}>
         <Folders />

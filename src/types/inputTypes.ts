@@ -10,4 +10,5 @@ export interface inputsType {
   input: inputsObjType;
   onChange: (event: any) => void;
   onBlur?: () => void;
+  onClick?: () => void;
 }
