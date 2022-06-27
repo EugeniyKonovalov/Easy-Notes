@@ -19,16 +19,31 @@ const AddNoteForm: React.FC<INoteItem> = (props) => {
   const currentPosition = useAppSelector(
     (state) => state.appItem.currentPosition
   );
+  const noteData = useAppSelector((state) => state.appItem.notes);
+  const selectedNoteForReplace = noteData.filter(
+    (item) => item.id === selectedNoteId
+  );
+  const selectedNoteTitle = selectedNoteForReplace
+    .map((item) => item.title)
+    .toString();
+  const selectedNoteDescription = selectedNoteForReplace
+    .map((item) => item.description)
+    .toString();
+  const selectedNoteTags = selectedNoteForReplace
+    .map((item) => item.tags)
+    .toString();
   const isReplace = useAppSelector((state) => state.ui.isReplace);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>(
-    !isReplace ? "" : props.item.title
+    !isReplace ? "" : selectedNoteTitle
   );
   const [description, setDescription] = useState<string>(
-    !isReplace ? "" : props.item.description
+    !isReplace ? "" : selectedNoteDescription
   );
-  const [tags, setTags] = useState<string[]>(!isReplace ? [] : props.item.tags);
+  const [tags, setTags] = useState<string[]>(
+    !isReplace ? [] : [selectedNoteTags]
+  );
 
   const submitNotesHandler = (event: React.FormEvent) => {
     event!.preventDefault();
