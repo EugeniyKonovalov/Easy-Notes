@@ -7,6 +7,7 @@ const initialState: IState = {
   selectedNoteId: null,
   selectedFolderId: 1,
   filteredNote: [],
+  currentPosition: null,
 };
 
 const appSlice = createSlice({
@@ -39,11 +40,23 @@ const appSlice = createSlice({
     deleteNote(state: any, action: PayloadAction<number>) {
       state.notes.filter((item: INote) => item.id !== action.payload);
     },
+    replaceNoteAsync(state: any, action: PayloadAction<INote>) {},
+    replaceNote(state: any, action: PayloadAction<INote>) {
+      const result = state.notes.find(
+        (item: INote) => item.id === action.payload.id
+      );
+      if (!result) {
+        state.notes.push(action.payload);
+      }
+    },
     setSelectedNoteId(state: any, action: PayloadAction<number>): void {
       state.selectedNoteId = action.payload;
     },
     dragAndDropNote(state: any, action: PayloadAction<INote[]>) {
       state.notes = action.payload;
+    },
+    setCurrentNotePosition(state: any, action: PayloadAction<number>) {
+      state.currentPosition = action.payload;
     },
     filteredNote(state: any, action: PayloadAction<INote[]>) {
       state.filteredNote = action.payload;

@@ -45,6 +45,7 @@ const FolderNotes: React.FC = () => {
         : note
     );
     dispatch(appActions.dragAndDropNote(draggableNote));
+    dispatch(appActions.setCurrentNotePosition(item.position));
   };
   const sortNotes = (a: INote, b: INote) => (a.position > b.position ? 1 : -1);
   useEffect(() => {

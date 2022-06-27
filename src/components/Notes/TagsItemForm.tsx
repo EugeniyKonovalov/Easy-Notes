@@ -9,7 +9,6 @@ const TagsItemForm: React.FC<ITags> = (props) => {
     props.setTags([...props.tags, tagsItem]);
     setTagsItem("");
   };
-  console.log(tagsItem);
   const removeTag = (index: number) => {
     props.setTags(props.tags.filter((el, i) => i !== index));
   };

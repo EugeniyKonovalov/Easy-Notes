@@ -2,30 +2,52 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
+import { INoteItem } from "../../types/appDataTypes";
 import BackArrowBtn from "../UI/BackArrowBtn";
 import ButtonMain from "../UI/ButtonMain";
 import Card from "../UI/Card";
 import classes from "./NoteItem.module.css";
 import TagsItemForm from "./TagsItemForm";
 
-const AddNoteForm: React.FC = () => {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
-  const dispatch = useAppDispatch();
+const AddNoteForm: React.FC<INoteItem> = (props) => {
   const selectedFolderId = useAppSelector(
     (state) => state.appItem.selectedFolderId
   );
+  const selectedNoteId = useAppSelector(
+    (state) => state.appItem.selectedNoteId
+  );
+  const currentPosition = useAppSelector(
+    (state) => state.appItem.currentPosition
+  );
+  const isReplace = useAppSelector((state) => state.ui.isReplace);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [title, setTitle] = useState<string>(
+    !isReplace ? "" : props.item.title
+  );
+  const [description, setDescription] = useState<string>(
+    !isReplace ? "" : props.item.description
+  );
+  const [tags, setTags] = useState<string[]>(!isReplace ? [] : props.item.tags);
+
   const submitNotesHandler = (event: React.FormEvent) => {
     event!.preventDefault();
     dispatch(
-      appActions.addNoteAsync({
-        directoryId: selectedFolderId,
-        title,
-        description,
-        tags,
-      })
+      !isReplace
+        ? appActions.addNoteAsync({
+            directoryId: selectedFolderId,
+            title,
+            description,
+            tags,
+          })
+        : appActions.replaceNoteAsync({
+            id: selectedNoteId,
+            directoryId: selectedFolderId,
+            position: 1,
+            title,
+            description,
+            tags,
+          })
     );
     setTitle("");
     setDescription("");
@@ -57,7 +79,7 @@ const AddNoteForm: React.FC = () => {
 
         <div className="btn-group">
           <BackArrowBtn />
-          <ButtonMain text="Add Note" />
+          <ButtonMain text={!isReplace ? "Add Note" : "Replase Note"} />
         </div>
       </form>
     </Card>

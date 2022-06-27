@@ -1,11 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { uiActions } from "../../store/uiSlice";
 
 const BackArrowBtn: React.FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
+  const isReplace = useAppSelector((state) => state.ui.isReplace);
   const backToOnehandler = () => {
-    navigate(-1);
+    isReplace && dispatch(uiActions.onReplace());
+    !isReplace && navigate(-1);
   };
 
   return (
