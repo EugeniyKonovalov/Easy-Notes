@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
 import { INoteItem } from "../../types/appDataTypes";
+import { FOLDERS_ROUTE } from "../../utils/constants";
 import BackArrowBtn from "../UI/BackArrowBtn";
 import ButtonMain from "../UI/ButtonMain";
 import Card from "../UI/Card";
@@ -19,31 +21,16 @@ const AddNoteForm: React.FC<INoteItem> = (props) => {
   const currentPosition = useAppSelector(
     (state) => state.appItem.currentPosition
   );
-  const noteData = useAppSelector((state) => state.appItem.notes);
-  const selectedNoteForReplace = noteData.filter(
-    (item) => item.id === selectedNoteId
-  );
-  const selectedNoteTitle = selectedNoteForReplace
-    .map((item) => item.title)
-    .toString();
-  const selectedNoteDescription = selectedNoteForReplace
-    .map((item) => item.description)
-    .toString();
-  const selectedNoteTags = selectedNoteForReplace
-    .map((item) => item.tags)
-    .toString();
   const isReplace = useAppSelector((state) => state.ui.isReplace);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>(
-    !isReplace ? "" : selectedNoteTitle
+    !isReplace ? "" : props.item.title
   );
   const [description, setDescription] = useState<string>(
-    !isReplace ? "" : selectedNoteDescription
+    !isReplace ? "" : props.item.description
   );
-  const [tags, setTags] = useState<string[]>(
-    !isReplace ? [] : [selectedNoteTags]
-  );
+  const [tags, setTags] = useState<string[]>(!isReplace ? [] : props.item.tags);
 
   const submitNotesHandler = (event: React.FormEvent) => {
     event!.preventDefault();
@@ -66,7 +53,7 @@ const AddNoteForm: React.FC<INoteItem> = (props) => {
     );
     setTitle("");
     setDescription("");
-    navigate(-1);
+    navigate(FOLDERS_ROUTE + selectedFolderId);
   };
 
   return (

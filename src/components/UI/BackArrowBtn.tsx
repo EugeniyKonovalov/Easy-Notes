@@ -9,7 +9,7 @@ const BackArrowBtn: React.FC = () => {
   const isReplace = useAppSelector((state) => state.ui.isReplace);
   const backToOnehandler = () => {
     isReplace && dispatch(uiActions.onReplace());
-    !isReplace && navigate(-1);
+    navigate(-1);
   };
 
   return (

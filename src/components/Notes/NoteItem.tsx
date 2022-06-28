@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
 import { uiActions } from "../../store/uiSlice";
 import { INoteItem } from "../../types/appDataTypes";
-// import { NEW_NOTE } from "../../utils/constants";
 import BackArrowBtn from "../UI/BackArrowBtn";
 import ButtonMain from "../UI/ButtonMain";
 import Card from "../UI/Card";
@@ -37,7 +36,10 @@ const NoteItem: React.FC<INoteItem> = (props) => {
           <div className={classes.control}>
             <div>
               {props.item.tags.map((item, index) => (
-                <span key={index} className={classes.tags}>
+                <span
+                  key={index}
+                  className={`${classes.tags} ${classes["no-pointer"]}`}
+                >
                   {item}
                 </span>
               ))}

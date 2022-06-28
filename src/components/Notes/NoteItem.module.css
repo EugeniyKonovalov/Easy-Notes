@@ -79,8 +79,8 @@ p {
   box-shadow: 0 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
 }
 
-.hide {
-  display: none;
+.no-pointer {
+  cursor: default;
 }
 .action-btn {
   display: flex;

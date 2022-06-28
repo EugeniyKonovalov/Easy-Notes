@@ -12,6 +12,7 @@ const uiSlice = createSlice({
     },
     onReplace(state: any): void {
       state.isReplace = !state.isReplace;
+      console.log(state.isReplace);
     },
   },
 });
