@@ -14,7 +14,7 @@ const NoteDetail: React.FC = () => {
   const { noteId } = params;
 
   useEffect(() => {
-    dispatch(appActions.setSelectedNoteId(Number(noteId)));
+    dispatch(appActions.setSelectedNoteId(+noteId));
   }, [dispatch, noteId]);
   const noteDetailData = notesData.filter((item) => item.id === selectedNoteId);
 

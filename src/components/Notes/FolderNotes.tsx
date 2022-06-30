@@ -21,7 +21,7 @@ const FolderNotes: React.FC = () => {
   const { folderId } = params;
 
   useEffect(() => {
-    dispatch(appActions.setSelectedFolderId(Number(folderId)));
+    dispatch(appActions.setSelectedFolderId(+folderId));
   }, [dispatch, folderId]);
   return (
     <Card>
