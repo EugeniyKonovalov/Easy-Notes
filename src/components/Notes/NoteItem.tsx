@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAuth } from "../../hooks/useAuth";
 import { appActions } from "../../store/appSlice";
 import { uiActions } from "../../store/uiSlice";
 import { INoteItem } from "../../types/appDataTypes";
@@ -16,7 +17,7 @@ const NoteItem: React.FC<INoteItem> = (props) => {
     (state) => state.appItem.selectedNoteId
   );
   const isReplace = useAppSelector((state) => state.ui.isNoteReplace);
-
+  const { isAuth } = useAuth();
   const navigate = useNavigate();
   const replaceNoteHandler = () => {
     dispatch(uiActions.onNoteReplace());
@@ -47,10 +48,12 @@ const NoteItem: React.FC<INoteItem> = (props) => {
           </div>
           <div className="btn-group">
             <BackArrowBtn />
-            <div className={classes["action-btn"]}>
-              <ButtonMain text="Replace" onClick={replaceNoteHandler} />
-              <ButtonMain text="Remove" onClick={removeNoteHandler} />
-            </div>
+            {isAuth && (
+              <div className={classes["action-btn"]}>
+                <ButtonMain text="Replace" onClick={replaceNoteHandler} />
+                <ButtonMain text="Remove" onClick={removeNoteHandler} />
+              </div>
+            )}
           </div>
         </Card>
       )}
