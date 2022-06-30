@@ -1,6 +1,7 @@
 import Home from "../../Pages/Home";
-import Login from "../../Pages/Login";
+import Login from "../../Pages/LoginPage";
 import NoteDetail from "../../Pages/NoteDetail";
+import Register from "../../Pages/RegisterPage";
 import Search from "../../Pages/Search";
 import {
   FOLDERS_ROUTE,
@@ -8,6 +9,7 @@ import {
   LOGIN,
   NEW_FOLDER,
   NEW_NOTE,
+  REGISTRATION,
   SEARCH,
 } from "../../utils/constants";
 import AddFolderForm from "../Folders/AddFolderForm";
@@ -41,11 +43,19 @@ export const routes = [
     element: <NoteDetail />,
   },
   {
+    path: REGISTRATION,
+    element: <Register />,
+  },
+  {
     path: LOGIN,
     element: <Login />,
   },
   {
     path: SEARCH,
     element: <Search />,
+  },
+  {
+    path: SEARCH + "/:noteId",
+    element: <NoteDetail />,
   },
 ];

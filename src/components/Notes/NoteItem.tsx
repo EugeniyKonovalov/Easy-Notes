@@ -15,11 +15,11 @@ const NoteItem: React.FC<INoteItem> = (props) => {
   const selectedNoteId = useAppSelector(
     (state) => state.appItem.selectedNoteId
   );
-  const isReplace = useAppSelector((state) => state.ui.isReplace);
+  const isReplace = useAppSelector((state) => state.ui.isNoteReplace);
 
   const navigate = useNavigate();
   const replaceNoteHandler = () => {
-    dispatch(uiActions.onReplace());
+    dispatch(uiActions.onNoteReplace());
   };
 
   const removeNoteHandler = () => {

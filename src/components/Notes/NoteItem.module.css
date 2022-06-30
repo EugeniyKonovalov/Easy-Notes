@@ -23,7 +23,7 @@ p {
   background-image: linear-gradient(
     to right top,
     rgba(255, 255, 255, 0.9),
-    rgba(165, 216, 255, 0.3)
+    rgba(211, 200, 169, 0.4)
   );
   border: 1px solid #aaa;
   display: block;
@@ -73,10 +73,10 @@ p {
   border-radius: 0.4rem;
   background-image: linear-gradient(
     to right top,
-    rgba(165, 216, 255, 0.7),
-    rgba(51, 155, 240, 0.9)
+    rgba(211, 200, 169, 0.7),
+    rgb(63, 53, 53)
   );
-  box-shadow: 0 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
+  box-shadow: 0rem 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
 }
 
 .no-pointer {

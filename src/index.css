@@ -27,8 +27,8 @@ body {
   font-family: "JetBrains Mono", sans-serif;
   line-height: 1;
   font-weight: 400;
-  color: #555;
-  background-image: url("../src/assets/img/sharon-mccutcheon-eMP4sYPJ9x0-unsplash.jpg");
+  color: #333;
+  background-image: url("../src/assets/img/bruno-fernandes--aIzs0PpVXY-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -40,11 +40,11 @@ a {
 
 a:link,
 a:visited {
-  color: #555;
+  color: inherit;
 }
 a:hover,
 a:active {
-  color: #555;
+  color: inherit;
 }
 .home {
   font-size: 2.4rem;
@@ -61,16 +61,17 @@ a:active {
   cursor: pointer;
   padding: 0.8rem 1.6rem;
   font-size: 1.8rem;
-  color: #333;
+  color: #222;
   border-radius: 0.4rem;
   background-image: linear-gradient(
     to right top,
-    rgba(165, 216, 255, 0.7),
-    rgba(51, 155, 240, 0.9)
+    rgba(211, 200, 169, 0.7),
+    rgb(63, 53, 53)
   );
-  box-shadow: 0 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
+  box-shadow: 0rem 0.1rem 0.5rem rgba(119, 119, 119, 0.5);
 }
 .btn:hover {
+  background-color: rgb(75, 145, 75);
   animation: move-shadow 1.5s forwards;
 }
 .btn:disabled,
@@ -78,8 +79,8 @@ a:active {
 .btn:disabled:active {
   background-image: linear-gradient(
     to right top,
-    rgba(255, 255, 255, 0.7),
-    rgba(61, 61, 61, 0.9)
+    rgba(235, 235, 235, 0.7),
+    rgb(141, 141, 141)
   );
   animation: none;
   cursor: not-allowed;

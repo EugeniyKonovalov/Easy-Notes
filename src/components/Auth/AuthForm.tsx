@@ -1,25 +1,21 @@
 import React, { useCallback } from "react";
+import { useLocation } from "react-router";
 import { useAppDispatch } from "../../hooks/redux";
 import UseInput from "../../hooks/useInput";
-import { authActions } from "../../store/authSlice";
 import { uiActions } from "../../store/uiSlice";
+import { IAuthForm } from "../../types/authDataTypes";
+import { LOGIN } from "../../utils/constants";
 import ButtonMain from "../UI/ButtonMain";
 import Input from "../UI/Input";
 import classes from "./AuthForm.module.css";
 
-const AuthForm: React.FC = () => {
-  const dispatch = useAppDispatch();
+const AuthForm: React.FC<IAuthForm> = ({ title, submitHandler, authLink }) => {
   const isNotEmpty = (value: string) => value.trim() !== "";
   const isEmail = (value: string) => value.includes("@");
   const isPasswordLong = (value: string) => value.trim().length >= 8;
-  const {
-    value: enteredName,
-    isValid: nameIsValid,
-    hasError: nameHasError,
-    changeHandler: nameChangehandler,
-    blurHandler: nameBlurHandler,
-    resetInput: nameReset,
-  } = UseInput(isNotEmpty);
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const isLogin = location.pathname === LOGIN;
   const {
     value: enteredEmail,
     isValid: emailIsValid,
@@ -38,44 +34,32 @@ const AuthForm: React.FC = () => {
   } = UseInput(isNotEmpty && isPasswordLong);
 
   let formIsValid = false;
-  if (nameIsValid && emailIsValid && passwordIsValid) {
+  if (emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
 
-  const submitHandler = useCallback(
+  const formSubmitHandler = useCallback(
     (event: React.FormEvent) => {
       event!.preventDefault();
-      dispatch(
-        authActions.login({
-          name: enteredName,
-          email: enteredEmail,
-          password: enteredPassword,
-        })
-      );
+      submitHandler(enteredEmail, enteredPassword);
       if (!formIsValid) {
         return;
       }
-      nameReset();
       emailReset();
       passwordReset();
-      localStorage.setItem("token", enteredName);
       dispatch(uiActions.onToggle());
     },
     [
       dispatch,
       emailReset,
       enteredEmail,
-      enteredName,
       enteredPassword,
       formIsValid,
-      nameReset,
       passwordReset,
+      submitHandler,
     ]
   );
 
-  const nameClasses = nameHasError
-    ? `${classes.control} ${classes.invalid}`
-    : classes.control;
   const emailClasses = emailHasError
     ? `${classes.control} ${classes.invalid}`
     : classes.control;
@@ -84,23 +68,8 @@ const AuthForm: React.FC = () => {
     : classes.control;
 
   return (
-    <form onSubmit={submitHandler} className={classes.form}>
-      <div className={nameClasses}>
-        <Input
-          label="Name"
-          input={{
-            value: enteredName,
-            id: "name",
-            type: "text",
-            placeholder: "Enter your name",
-          }}
-          onChange={nameChangehandler}
-          onBlur={nameBlurHandler}
-        />
-        {nameHasError && (
-          <p className={classes["error-text"]}>Please enter name!</p>
-        )}
-      </div>
+    <form onSubmit={formSubmitHandler} className={classes.form}>
+      <h2 className={classes.title}>{title}</h2>
       <div className={emailClasses}>
         <Input
           label="E-mail"
@@ -135,8 +104,14 @@ const AuthForm: React.FC = () => {
           </p>
         )}
       </div>
-      <div className={classes["form-btn"]}>
-        <ButtonMain text="Login" disabled={!formIsValid} />
+      <div className={classes.auth}>
+        <div className={classes["auth-link"]}>
+          {isLogin ? "Don't have acount? " : "Back to "}
+          {authLink}
+        </div>
+        <div className={classes["form-btn"]}>
+          <ButtonMain text="Login" disabled={!formIsValid} />
+        </div>
       </div>
     </form>
   );

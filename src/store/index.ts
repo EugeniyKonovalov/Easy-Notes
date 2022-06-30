@@ -9,9 +9,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
-    appItem: folderSlice.reducer,
-    ui: uiSlice.reducer,
-    auth: authSlice.reducer,
+    appItem: folderSlice,
+    ui: uiSlice,
+    auth: authSlice,
   },
   middleware: [sagaMiddleware],
 });

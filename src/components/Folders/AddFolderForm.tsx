@@ -25,6 +25,7 @@ const AddFolderForm: React.FC = (props) => {
         name: currentName,
       })
     );
+
     setCurrentName("");
     navigate(HOME_ROUTE);
   };

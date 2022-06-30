@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { appActions } from "../../store/appSlice";
+import { uiActions } from "../../store/uiSlice";
 import { INoteItem } from "../../types/appDataTypes";
 import { FOLDERS_ROUTE } from "../../utils/constants";
 import BackArrowBtn from "../UI/BackArrowBtn";
@@ -18,10 +18,8 @@ const AddNoteForm: React.FC<INoteItem> = (props) => {
   const selectedNoteId = useAppSelector(
     (state) => state.appItem.selectedNoteId
   );
-  const currentPosition = useAppSelector(
-    (state) => state.appItem.currentPosition
-  );
-  const isReplace = useAppSelector((state) => state.ui.isReplace);
+
+  const isReplace = useAppSelector((state) => state.ui.isNoteReplace);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>(
@@ -45,12 +43,12 @@ const AddNoteForm: React.FC<INoteItem> = (props) => {
         : appActions.replaceNoteAsync({
             id: selectedNoteId,
             directoryId: selectedFolderId,
-            position: 1,
             title,
             description,
             tags,
           })
     );
+    isReplace && dispatch(uiActions.onNoteReplace());
     setTitle("");
     setDescription("");
     navigate(FOLDERS_ROUTE + selectedFolderId);

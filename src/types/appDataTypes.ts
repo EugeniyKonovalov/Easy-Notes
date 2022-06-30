@@ -9,14 +9,12 @@ export interface IState {
   notes: INote[];
   selectedNoteId: number;
   selectedFolderId: number;
-  currentPosition?: number;
   filteredNote: INote[];
 }
 
 export interface INote {
   id?: number;
   directoryId: number;
-  position?: number;
   title: string;
   description: string;
   tags: string[];
@@ -28,6 +26,7 @@ export interface ISubFolder {
 
 export interface INoteItem {
   item: INote;
+  index?: number;
   dragStartHandler?: (event: React.DragEvent, item: INote) => void;
   dragOverHandler?: (event: React.DragEvent) => void;
   dragEndHandler?: (event: React.DragEvent) => void;

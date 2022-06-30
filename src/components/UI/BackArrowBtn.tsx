@@ -6,9 +6,9 @@ import { uiActions } from "../../store/uiSlice";
 const BackArrowBtn: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isReplace = useAppSelector((state) => state.ui.isReplace);
+  const isReplace = useAppSelector((state) => state.ui.isNoteReplace);
   const backToOnehandler = () => {
-    isReplace && dispatch(uiActions.onReplace());
+    isReplace && dispatch(uiActions.onNoteReplace());
     navigate(-1);
   };
 

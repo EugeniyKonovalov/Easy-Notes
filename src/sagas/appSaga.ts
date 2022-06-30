@@ -2,16 +2,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { call, put, takeEvery, StrictEffect } from "redux-saga/effects";
 import { appActions } from "../store/appSlice";
 import axios from "axios";
-import { API_URL } from "../utils/constants";
 import { IFolder, INote } from "../types/appDataTypes";
 
 export function* addFolderAsync(action: PayloadAction<IFolder>): Generator {
   try {
-    console.log(action.payload);
     const addFolderFromApi = async () =>
       await axios({
         method: "post",
-        url: `${API_URL}/directories`,
+        url: `${process.env.REACT_APP_API_URL}/directories`,
         data: action.payload,
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -25,11 +23,10 @@ export function* addFolderAsync(action: PayloadAction<IFolder>): Generator {
 }
 export function* replaceFolderAsync(action: PayloadAction<IFolder>): Generator {
   try {
-    console.log(action.payload);
     const replaceFolderFromApi = async () =>
       await axios({
         method: "put",
-        url: `${API_URL}/directories/${action.payload.id}`,
+        url: `${process.env.REACT_APP_API_URL}/directories/${action.payload.id}`,
         data: action.payload,
         headers: {
           "Content-Type": "application/json",
@@ -43,11 +40,10 @@ export function* replaceFolderAsync(action: PayloadAction<IFolder>): Generator {
 }
 export function* deleteFolderAsync(action: PayloadAction<number>): Generator {
   try {
-    console.log(action.payload);
     const deleteFolderFromApi = async () =>
       await axios({
         method: "delete",
-        url: `${API_URL}/directories/${action.payload}`,
+        url: `${process.env.REACT_APP_API_URL}/directories/${action.payload}`,
       });
     const response: any = yield call(deleteFolderFromApi);
     yield put(appActions.deleteFolder(response));
@@ -58,11 +54,10 @@ export function* deleteFolderAsync(action: PayloadAction<number>): Generator {
 
 export function* addNoteAsync(action: PayloadAction<INote>): Generator {
   try {
-    console.log(action.payload);
     const addNoteFromApi = async () =>
       await axios({
         method: "post",
-        url: `${API_URL}/notices`,
+        url: `${process.env.REACT_APP_API_URL}/notices`,
         data: action.payload,
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -77,11 +72,10 @@ export function* addNoteAsync(action: PayloadAction<INote>): Generator {
 
 export function* replaceNoteAsync(action: PayloadAction<INote>): Generator {
   try {
-    console.log(action.payload);
     const replaceNoteFromApi = async () =>
       await axios({
         method: "put",
-        url: `${API_URL}/notices/${action.payload.id}`,
+        url: `${process.env.REACT_APP_API_URL}/notices/${action.payload.id}`,
         data: action.payload,
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -93,12 +87,13 @@ export function* replaceNoteAsync(action: PayloadAction<INote>): Generator {
     throw err;
   }
 }
+
 export function* deleteNoteAsync(action: PayloadAction<number>): Generator {
   try {
     const deleteNoteFromApi = async () =>
       await axios({
         method: "delete",
-        url: `${API_URL}/notices/${action.payload}`,
+        url: `${process.env.REACT_APP_API_URL}/notices/${action.payload}`,
       });
     const response: any = yield call(deleteNoteFromApi);
     yield put(appActions.deleteNote(response));
@@ -109,7 +104,6 @@ export function* deleteNoteAsync(action: PayloadAction<number>): Generator {
 function* appSaga(): Generator<StrictEffect> {
   yield takeEvery(appActions.addFolderAsync, addFolderAsync);
   yield takeEvery(appActions.deleteFolderAsync, deleteFolderAsync);
-  // yield takeEvery(appActions.replaceFolderAsync, replaceFolderAsync);
 
   yield takeEvery(appActions.addNoteAsync, addNoteAsync);
   yield takeEvery(appActions.deleteNoteAsync, deleteNoteAsync);

@@ -1,18 +1,18 @@
 import React from "react";
-import AuthForm from "../components/Auth/AuthForm";
+import SignUp from "../components/Auth/SignUp";
+
 import Modal from "../components/UI/Modal";
 import { useAppSelector } from "../hooks/redux";
 
 const Auth = (
   <Modal>
-    <AuthForm />
+    <SignUp />
   </Modal>
 );
 
-const Login: React.FC = (props) => {
+const Register: React.FC = (props) => {
   const showModal = useAppSelector((state) => state.ui.showModal);
-  console.log(showModal);
   return <>{showModal && Auth}</>;
 };
 
-export default Login;
+export default Register;

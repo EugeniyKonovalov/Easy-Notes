@@ -19,10 +19,9 @@
   font-size: 1.6rem;
 }
 
-.drag-over {
-  border: 0.05rem solid #999;
-  border-radius: 0.4rem;
-}
-.drag-end {
-  border: none;
+.text-icon {
+  background-image: url("./../../assets/img/default.ico");
+  background-size: cover;
+  width: 17rem;
+  height: 17rem;
 }

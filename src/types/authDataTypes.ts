@@ -1,6 +1,11 @@
 export interface IAuth {
-  isAuth?: boolean;
-  name: string;
   email: string;
-  password: string;
+  token: string;
+  id: string;
+}
+
+export interface IAuthForm {
+  title: string;
+  submitHandler: (email: string, password: string) => void;
+  authLink: JSX.Element;
 }

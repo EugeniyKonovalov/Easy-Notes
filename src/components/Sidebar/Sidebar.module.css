@@ -1,22 +1,17 @@
-.sidebar-is-auth {
-  display: grid;
-  grid-template-columns: 3.3fr 4.7fr;
-  margin-top: 3.5rem;
-  padding-top: 2.4rem;
-}
-
 .sidebar {
-  margin-top: 3.5rem;
-  padding-top: 2.4rem;
-}
-
-.sidebar-directories {
-  display: flex;
-  justify-content: space-between;
   border-left: 2px solid #aaa;
   border-right: 2px solid #aaa;
   height: 80vh;
+  margin-top: 3.5rem;
+  padding-top: 2.4rem;
 }
-.sidebar-directories ul {
+.sidebar ul {
   list-style: none;
+}
+.title {
+  font-size: 2.4rem;
+  color: #ddd;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  cursor: pointer;
 }

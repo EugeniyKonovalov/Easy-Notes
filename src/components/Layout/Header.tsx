@@ -2,10 +2,12 @@ import React, { useCallback, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAuth } from "../../hooks/useAuth";
 import { appActions } from "../../store/appSlice";
 import { authActions } from "../../store/authSlice";
 import { uiActions } from "../../store/uiSlice";
 import { HOME_ROUTE, LOGIN, SEARCH } from "../../utils/constants";
+import Menu from "./Menu";
 import ButtonMain from "../UI/ButtonMain";
 import Input from "../UI/Input";
 import classes from "./Header.module.css";
@@ -15,8 +17,7 @@ const Header: React.FC = (props) => {
   const [show, setShow] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-  const userName = localStorage.getItem("token");
+  const { isAuth, email } = useAuth();
   const noteData = useAppSelector((state) => state.appItem.notes);
 
   const showModalhandler = () => {
@@ -40,15 +41,28 @@ const Header: React.FC = (props) => {
   const inputShowHandler = () => setShow(true);
 
   const logoutHandler = useCallback(() => {
-    dispatch(authActions.logout());
-    localStorage.removeItem("token");
+    dispatch(authActions.removeUser());
     navigate(HOME_ROUTE, { replace: true });
   }, [dispatch, navigate]);
   return (
-    <header className={classes.header}>
-      <Link to={HOME_ROUTE}>
-        <h1 className={classes.logo}>Note Manager</h1>
-      </Link>
+    <header
+      className={
+        isAuth
+          ? `${classes.header} ${classes["menu-header"]}`
+          : `${classes.header} ${classes["hide-menu-header"]}`
+      }
+    >
+      <h1>
+        <Link to={HOME_ROUTE} className={classes.logo}>
+          Easy Notes
+        </Link>
+      </h1>
+      <div className={isAuth ? classes.dropdown : classes["hide-menu"]}>
+        <button className={classes["drop-btn"]}>Menu</button>
+        <div className={classes["dropdown-content"]}>
+          <Menu />
+        </div>
+      </div>
       <form className={classes["form-search"]}>
         <Input
           onChange={(event) => setSearchText(event.target.value)}
@@ -85,7 +99,7 @@ const Header: React.FC = (props) => {
           </NavLink>
         )}
         {isAuth && <ButtonMain text="Logout" onClick={logoutHandler} />}
-        {isAuth && <ButtonMain text={userName} />}
+        {isAuth && <ButtonMain text={email} />}
       </div>
     </header>
   );

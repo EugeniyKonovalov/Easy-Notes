@@ -2,31 +2,37 @@ import Layout from "./components/Layout/Layout";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { useCallback, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "./utils/constants";
 import { appActions } from "./store/appSlice";
 import AppRouter from "./components/Router/AppRouter";
+import { useLocation } from "react-router";
+import Notification from "./components/UI/Notification";
+import { uiActions } from "./store/uiSlice";
 
 function App() {
   const dispatch = useAppDispatch();
-  const folderData = useAppSelector((state) => state.appItem.folders);
-  const noteData = useAppSelector((state) => state.appItem.notes);
-
-  console.log(folderData);
-  console.log(noteData);
-
+  const location = useLocation();
+  const notification = useAppSelector((state) => state.ui.notification);
   const fetchFolder = useCallback(async () => {
     await axios
-      .get(`${API_URL}/directories`)
+      .get(`${process.env.REACT_APP_API_URL}/directories`)
       .then((res) => {
         dispatch(appActions.setFolders(res.data));
       })
-      .catch((err) => {
-        throw err;
+      .catch((error) => {
+        dispatch(
+          uiActions.showNotification({
+            status: "error",
+            title: "Error",
+            message: "Getting folder data failed!",
+          })
+        );
       });
   }, [dispatch]);
   const fetchNotes = useCallback(async () => {
-    await axios
-      .get(`${API_URL}/notices`)
+    await axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}/notices`,
+    })
       .then((res) => {
         dispatch(appActions.setNotes(res.data));
       })
@@ -39,16 +45,23 @@ function App() {
       const timer = setTimeout(() => {
         fetchFolder();
         fetchNotes();
-      }, 100);
+      }, 200);
       return () => {
         clearTimeout(timer);
       };
     } catch (err) {
       throw new Error(err);
     }
-  }, [dispatch, fetchFolder, fetchNotes]);
+  }, [dispatch, fetchFolder, fetchNotes, location]);
   return (
     <>
+      {notification && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )}
       <Layout>
         <AppRouter />
       </Layout>
