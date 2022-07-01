@@ -21,23 +21,7 @@ export function* addFolderAsync(action: PayloadAction<IFolder>): Generator {
     throw err;
   }
 }
-export function* replaceFolderAsync(action: PayloadAction<IFolder>): Generator {
-  try {
-    const replaceFolderFromApi = async () =>
-      await axios({
-        method: "put",
-        url: `${process.env.REACT_APP_API_URL}/directories/${action.payload.id}`,
-        data: action.payload,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    const response: any = yield call(replaceFolderFromApi);
-    yield put(appActions.replaceNote(response.data));
-  } catch (err) {
-    throw err;
-  }
-}
+
 export function* deleteFolderAsync(action: PayloadAction<number>): Generator {
   try {
     const deleteFolderFromApi = async () =>
